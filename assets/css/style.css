@@ -17,9 +17,16 @@ body {
     background-image: url("../images/rainbow.png")
 }
 
-img {
-    width: 80%;
+#gameboard {
+    background-color: white; 
 }
+
+#hangman {
+    max-height: 400px;
+    border: grey 2px solid;
+    margin-bottom: 5%;
+}
+
 p {
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -35,4 +42,91 @@ p {
 #main-content {
     padding-left: 30px;
     padding-top: 30px;
+}
+
+.display-images {
+    top:20%;
+    left:20%;
+    margin-top: -50px;
+    margin-left: -50px;
+}
+
+#violet-page {
+    position: absolute;
+    top:5%;
+    left:25%;
+    z-index: 92;
+    width: 50%;
+    min-width: 250px;
+    float:left;
+}
+
+#indigo-page {
+    position: absolute;
+    top:5%;
+    left:25%;
+    z-index: 93;
+    width: 50%;
+    min-width: 250px;
+    float:left;
+}
+
+#blue-page {
+    position: absolute;
+    top:5%;
+    left:25%;
+    z-index: 94;
+    width: 50%;
+    min-width: 250px;
+    float:left;
+}
+
+#green-page {
+    position: absolute;
+    top:5%;
+    left:25%;
+    z-index: 95;
+    width: 50%;
+    min-width: 250px;
+    float:left;
+}
+
+#yellow-page {
+    position: absolute;
+    top:5%;
+    left:25%;
+    z-index: 96;
+    width: 50%;
+    min-width: 250px;
+    float:left;
+}
+
+#orange-page {
+    position: absolute;
+    top:5%;
+    left:25%;
+    z-index: 97;
+    width: 50%;
+    min-width: 250px;
+    float:left;
+}
+
+#red-page {
+    position: absolute;
+    top:5%;
+    left:25%;
+    z-index: 98;
+    width: 50%;
+    min-width: 250px; 
+    float:left;
+}
+
+#lose-page {
+    position: absolute;
+    top:5%;
+    left:25%;
+    z-index: 99;
+    width: 50%;
+    min-width: 250px;
+    float:left;
 }

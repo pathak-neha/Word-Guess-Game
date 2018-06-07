@@ -15,15 +15,18 @@
     var userGuess;
     var lettersGuessed = [];
 
-    // within game functions
-    var correctGuess=true;
-    var complete=true;
+    // Game sounds
+    var winSound = new Audio("./assets/sounds/Splat.wav");
+    var loseSound = new Audio("./assets/sounds/Lose.wav");
 
 // ------------------------------------------------------ DEFINING FUNCTIONS -------------------------------------------------------
 
-    // to start a new game
+    // to initiate new game
     function newGame() {
+        document.getElementById("main-content").cssText="z-index: 99;";
+
         // partially reset stats
+        clear();
         errors=0;
         guessedLetters=[];
         blanks=[];
@@ -46,9 +49,10 @@
 
         // displays the blanks
         document.querySelector("#current-word").innerHTML=(blanks.join(" "));
-    };
 
-    // to recognize keyboard event     
+        };
+
+    // on keyboard event     
     document.onkeyup = function(event) {
         userGuess = event.key;
 
@@ -65,7 +69,7 @@
             } else {
 
                 // to check if the word contains the guessed letter
-                correctGuess=false;
+                var correctGuess=false;
                 for (var i=0;i<word.length;i++) {
                     if (word[i]===userGuess) {
                         blanks[i]=userGuess;
@@ -76,14 +80,11 @@
                 // update display
                 document.querySelector("#current-word").innerHTML=(blanks.join(" "));
                 
-                // to check status of correctGuess
-                // console.log("status of correctGuess is "+correctGuess);
-                
                 // if user guesses an incorrect letter
                 if (correctGuess===false) {
                     // increase error count by one and update display
                     errors+=1;
-                    document.querySelector("#error-counter").innerHTML=errors;
+                    document.querySelector("#error-counter").innerHTML=errors+"/10";
 
                     // update drawing
                     drawing = document.getElementById("hangman");
@@ -95,7 +96,7 @@
                 }
 
                 // reset variable
-                complete=true;
+                var complete=true;
                 // to check if the word is complete
                 for (var i=0;i<word.length;i++){
                     if (blanks[i]=="_") {
@@ -103,25 +104,45 @@
                     }
                 }
 
-                // to check complete status
-                // console.log("status of complete is "+complete);
-                
                 // if the word is complete, then update win counter and start a new game
                 if (complete===true) {
                     wins++;
                     document.querySelector("#wins").innerHTML=wins;
-                    newGame();
-                };
-
+                    showImage((word+"-page"));
+                    winSound.play();
+                };  
+                
                 // if max number of errors is reached, update loss counter and start a new game
                 if (errors>9) {
                     losses++;
                     document.querySelector("#losses").innerHTML=losses;
-                    newGame();
+                    showImage("lose-page");
+                    loseSound.play();
                 };
+
             };
         };
     };
+
+    // to show image
+    function showImage(elementID) {
+        document.getElementById("main-content").cssText="z-index: 0";
+        var graphic = document.getElementById(elementID);
+        graphic.style.cssText="display: ";
+        graphic.addEventListener("click",newGame);
+    }
+
+    // to hide image(s)
+    function clear() {
+        document.getElementById("violet-page").style.cssText="display: none";
+        document.getElementById("indigo-page").style.cssText="display: none";
+        document.getElementById("blue-page").style.cssText="display: none";
+        document.getElementById("green-page").style.cssText="display: none";
+        document.getElementById("yellow-page").style.cssText="display: none";
+        document.getElementById("orange-page").style.cssText="display: none";
+        document.getElementById("red-page").style.cssText="display: none";
+        document.getElementById("lose-page").style.cssText="display: none";
+    }
 
 // ------------------------------------------------------ INITIALIZING NEW GAME -------------------------------------------------------
 window.onload = newGame();
